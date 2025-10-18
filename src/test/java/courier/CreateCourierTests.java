@@ -3,6 +3,7 @@ package courier;
 import io.qameta.allure.junit4.DisplayName;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
+import login.Login;
 import org.apache.http.HttpStatus;
 import org.junit.After;
 import org.junit.Before;
@@ -22,7 +23,7 @@ public class CreateCourierTests {
 
     @After
     public void tearDown() {
-        Response response = CourierActions.login(courier);
+        Response response = CourierActions.login(new Login(courier.getLogin(), courier.getPassword()));
         if(response.then().extract().statusCode() == HttpStatus.SC_OK)
         {
             String id = response.then().extract().path("id").toString();
