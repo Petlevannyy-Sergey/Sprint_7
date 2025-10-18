@@ -1,0 +1,67 @@
+package courier;
+
+import io.qameta.allure.junit4.DisplayName;
+import io.restassured.RestAssured;
+import io.restassured.response.Response;
+import org.apache.http.HttpStatus;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+import utils.RandomUtils;
+
+import static org.hamcrest.Matchers.equalTo;
+
+@RunWith(Parameterized.class)
+
+public class CreateCourierParameterizedTests {
+    private final String login;
+    private final String password;
+    private final String firstName;
+
+    public CreateCourierParameterizedTests(String login, String password, String firstName) {
+        this.login = login;
+        this.password = password;
+        this.firstName = firstName;
+    }
+
+    @Parameterized.Parameters
+    public static Object[][] getTestData() {
+        return new Object[][]{
+                {"", RandomUtils.GeneratePassword(), RandomUtils.GenerateFirstName()},
+                {RandomUtils.GenerateLogin(), "", RandomUtils.GenerateFirstName()},
+                {RandomUtils.GenerateLogin(), RandomUtils.GeneratePassword(), ""},
+                {"", "", ""}
+        };
+    }
+
+    @Before
+    public void setUp() {
+        RestAssured.baseURI = "https://qa-scooter.praktikum-services.ru/";
+    }
+
+    @After
+    public void tearDown() {
+        Response response = CourierActions.login(new Courier(login, password, firstName));
+        if (response.then().extract().statusCode() == HttpStatus.SC_OK) {
+            String id = response.then().extract().path("id").toString();
+            CourierActions.delete(id);
+        }
+    }
+
+    @Test
+    @DisplayName("Создание курьера c одним не заполненным обязательным полем")
+    public void createCourierWithInsufficientDataThrowsError() {
+        // Arrange
+        Courier courier = new Courier(login, password, firstName);
+
+        // Act
+        Response response = CourierActions.create(courier);
+
+        // Assert
+        response.then().assertThat().statusCode(HttpStatus.SC_BAD_REQUEST)
+                .and()
+                .body("message", equalTo("Недостаточно данных для создания учетной записи"));
+    }
+}
