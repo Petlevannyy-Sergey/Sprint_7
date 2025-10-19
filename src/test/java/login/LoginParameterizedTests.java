@@ -12,6 +12,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import utils.RandomUtils;
+import utils.URIs;
 
 import static org.hamcrest.Matchers.equalTo;
 
@@ -27,7 +28,7 @@ public class LoginParameterizedTests {
 
     @Before
     public void setUp() {
-        RestAssured.baseURI = "https://qa-scooter.praktikum-services.ru/";
+        RestAssured.baseURI = URIs.BASE_URI;
     }
 
     @After
@@ -42,8 +43,8 @@ public class LoginParameterizedTests {
     @Parameterized.Parameters
     public static Object[][] getTestData() {
         return new Object[][]{
-                {"", RandomUtils.GeneratePassword()},
-                {RandomUtils.GenerateLogin(), ""},
+                {"", RandomUtils.generatePassword()},
+                {RandomUtils.generateLogin(), ""},
                 {"", ""},
         };
     }

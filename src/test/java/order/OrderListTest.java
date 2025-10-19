@@ -5,13 +5,14 @@ import io.restassured.RestAssured;
 import org.apache.http.HttpStatus;
 import org.junit.Before;
 import org.junit.Test;
+import utils.URIs;
 
 import static org.hamcrest.CoreMatchers.notNullValue;
 
 public class OrderListTest {
     @Before
     public void setUp() {
-        RestAssured.baseURI = "https://qa-scooter.praktikum-services.ru/";
+        RestAssured.baseURI = URIs.BASE_URI;
     }
 
     @Test

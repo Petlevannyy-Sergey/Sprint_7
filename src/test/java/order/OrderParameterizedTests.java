@@ -9,6 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
+import utils.URIs;
 
 import java.util.List;
 
@@ -25,7 +26,7 @@ public class OrderParameterizedTests {
 
     @Before
     public void setUp() {
-        RestAssured.baseURI = "https://qa-scooter.praktikum-services.ru/";
+        RestAssured.baseURI = URIs.BASE_URI;
     }
 
     @After

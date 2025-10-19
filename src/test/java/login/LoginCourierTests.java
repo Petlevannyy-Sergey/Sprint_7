@@ -11,6 +11,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import utils.RandomUtils;
+import utils.URIs;
 
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.Matchers.equalTo;
@@ -20,8 +21,8 @@ public class LoginCourierTests {
 
     @Before
     public void setUp() {
-        RestAssured.baseURI = "https://qa-scooter.praktikum-services.ru/";
-        courier = new Courier(RandomUtils.GenerateLogin(), RandomUtils.GeneratePassword(), RandomUtils.GenerateFirstName());
+        RestAssured.baseURI = URIs.BASE_URI;
+        courier = new Courier(RandomUtils.generateLogin(), RandomUtils.generatePassword(), RandomUtils.generateFirstName());
         CourierActions.create(courier);
     }
 
@@ -53,7 +54,7 @@ public class LoginCourierTests {
     @DisplayName("Авторизация с неверным логином")
     public void loginCourierWithIncorrectLoginThrowsError() {
         // Arrange
-        Login auth = new Login(RandomUtils.GenerateLogin(), courier.getPassword());
+        Login auth = new Login(RandomUtils.generateLogin(), courier.getPassword());
 
         // Act
         Response response = CourierActions.login(auth);
@@ -68,7 +69,7 @@ public class LoginCourierTests {
     @DisplayName("Авторизация с неверным паролем")
     public void loginCourierWithIncorrectPasswordThrowsError() {
         // Arrange
-        Login auth = new Login(courier.getLogin(), RandomUtils.GeneratePassword());
+        Login auth = new Login(courier.getLogin(), RandomUtils.generatePassword());
 
         // Act
         Response response = CourierActions.login(auth);
@@ -84,7 +85,7 @@ public class LoginCourierTests {
     @DisplayName("Авторизация с неверным логином и паролем")
     public void loginCourierWithIncorrectLoginAndPasswordThrowsError() {
         // Arrange
-        Login auth = new Login(RandomUtils.GenerateLogin(), RandomUtils.GeneratePassword());
+        Login auth = new Login(RandomUtils.generateLogin(), RandomUtils.generatePassword());
 
         // Act
         Response response = CourierActions.login(auth);

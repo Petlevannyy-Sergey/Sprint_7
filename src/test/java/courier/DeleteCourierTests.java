@@ -8,20 +8,21 @@ import org.apache.http.HttpStatus;
 import org.junit.Before;
 import org.junit.Test;
 import utils.RandomUtils;
+import utils.URIs;
 
 import static org.hamcrest.Matchers.equalTo;
 
 public class DeleteCourierTests {
     @Before
     public void setUp() {
-        RestAssured.baseURI = "https://qa-scooter.praktikum-services.ru/";
+        RestAssured.baseURI = URIs.BASE_URI;
     }
 
     @Test
     @DisplayName("Удаление курьера с валидным id")
     public void deleteCourierWithCorrectIdIsSuccess() {
         // Arrange
-        Courier courier = new Courier(RandomUtils.GenerateLogin(), RandomUtils.GeneratePassword(), RandomUtils.GenerateFirstName());
+        Courier courier = new Courier(RandomUtils.generateLogin(), RandomUtils.generatePassword(), RandomUtils.generateFirstName());
 
         // Act
         CourierActions.create(courier);

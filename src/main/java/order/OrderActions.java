@@ -21,4 +21,22 @@ public class OrderActions {
     public static Response get() {
         return given().header("Content-type", "application/json").when().get(URIs.ORDER);
     }
+
+    @Step("Получить заказ по его номеру")
+    public static Response get(String track) {
+        return given()
+                .header("Content-type", "application/json")
+                .queryParam("t", track)
+                .when()
+                .get(URIs.GET_ORDER);
+    }
+
+    @Step("Принять заказ")
+    public static Response accept(String orderId, String courierId) {
+        return given()
+                .header("Content-type", "application/json")
+                .queryParam("courierId", courierId)
+                .when()
+                .put(URIs.ACCEPT_ORDER + "/" + orderId);
+    }
 }
