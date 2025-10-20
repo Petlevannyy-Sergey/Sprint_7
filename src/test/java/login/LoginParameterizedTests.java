@@ -2,17 +2,14 @@ package login;
 
 import courier.CourierActions;
 import io.qameta.allure.junit4.DisplayName;
-import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import io.restassured.response.ValidatableResponse;
 import org.apache.http.HttpStatus;
 import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import utils.RandomUtils;
-import utils.URIs;
 
 import static org.hamcrest.Matchers.equalTo;
 

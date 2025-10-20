@@ -3,15 +3,12 @@ package order;
 import courier.Courier;
 import courier.CourierActions;
 import io.qameta.allure.junit4.DisplayName;
-import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import login.Login;
 import org.apache.http.HttpStatus;
 import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 import utils.RandomUtils;
-import utils.URIs;
 
 import java.util.List;
 
