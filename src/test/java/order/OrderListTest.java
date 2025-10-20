@@ -10,11 +10,6 @@ import utils.URIs;
 import static org.hamcrest.CoreMatchers.notNullValue;
 
 public class OrderListTest {
-    @Before
-    public void setUp() {
-        RestAssured.baseURI = URIs.BASE_URI;
-    }
-
     @Test
     @DisplayName("Проверка получения списка заказов")
     public void getOrderListIsSuccess() {

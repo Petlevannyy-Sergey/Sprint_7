@@ -17,11 +17,6 @@ import static org.hamcrest.CoreMatchers.notNullValue;
 public class GetOrderByNumberTests {
     String track;
 
-    @Before
-    public void setUp() {
-        RestAssured.baseURI = URIs.BASE_URI;
-    }
-
     @After
     public void tearDown() {
         if (track != null) {

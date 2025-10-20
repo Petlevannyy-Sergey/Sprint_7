@@ -21,11 +21,6 @@ public class AcceptOrderTests {
     String track;
     String id;
 
-    @Before
-    public void setUp() {
-        RestAssured.baseURI = URIs.BASE_URI;
-    }
-
     @After
     public void tearDown() {
         if (id != null) {

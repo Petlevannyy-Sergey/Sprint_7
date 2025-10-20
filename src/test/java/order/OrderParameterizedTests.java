@@ -24,11 +24,6 @@ public class OrderParameterizedTests {
         this.colors = colors;
     }
 
-    @Before
-    public void setUp() {
-        RestAssured.baseURI = URIs.BASE_URI;
-    }
-
     @After
     public void tearDown() {
         OrderActions.cancel(track);

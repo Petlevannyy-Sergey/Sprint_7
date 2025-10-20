@@ -21,7 +21,6 @@ public class LoginCourierTests {
 
     @Before
     public void setUp() {
-        RestAssured.baseURI = URIs.BASE_URI;
         courier = new Courier(RandomUtils.generateLogin(), RandomUtils.generatePassword(), RandomUtils.generateFirstName());
         CourierActions.create(courier);
     }

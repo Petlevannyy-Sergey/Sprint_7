@@ -1,32 +1,40 @@
 package courier;
 
 import io.qameta.allure.junit4.DisplayName;
-import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import login.Login;
 import org.apache.http.HttpStatus;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import utils.RandomUtils;
-import utils.URIs;
 
 import static org.hamcrest.Matchers.equalTo;
 
 public class DeleteCourierTests {
+    String id;
+
     @Before
     public void setUp() {
-        RestAssured.baseURI = URIs.BASE_URI;
+        Courier courier = new Courier(RandomUtils.generateLogin(),
+                RandomUtils.generatePassword(),
+                RandomUtils.generateFirstName());
+
+        CourierActions.create(courier);
+        id = CourierActions.login(new Login(courier.getLogin(), courier.getPassword())).then().extract().path("id").toString();
+    }
+
+    @After
+    public void tearDown() {
+        CourierActions.delete(id);
     }
 
     @Test
     @DisplayName("Удаление курьера с валидным id")
     public void deleteCourierWithCorrectIdIsSuccess() {
         // Arrange
-        Courier courier = new Courier(RandomUtils.generateLogin(), RandomUtils.generatePassword(), RandomUtils.generateFirstName());
 
         // Act
-        CourierActions.create(courier);
-        String id = CourierActions.login(new Login(courier.getLogin(), courier.getPassword())).then().extract().path("id").toString();
         Response response = CourierActions.delete(id);
 
         // Assert

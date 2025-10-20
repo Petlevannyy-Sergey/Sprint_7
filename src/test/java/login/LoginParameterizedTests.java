@@ -26,11 +26,6 @@ public class LoginParameterizedTests {
         this.password = password;
     }
 
-    @Before
-    public void setUp() {
-        RestAssured.baseURI = URIs.BASE_URI;
-    }
-
     @After
     public void tearDown() {
         ValidatableResponse response = CourierActions.login(new Login(login, password)).then();

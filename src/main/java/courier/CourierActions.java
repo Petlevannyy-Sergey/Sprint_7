@@ -3,6 +3,7 @@ package courier;
 import io.qameta.allure.Step;
 import io.restassured.response.Response;
 import login.Login;
+import utils.Specification;
 import utils.URIs;
 
 import static io.restassured.RestAssured.given;
@@ -12,7 +13,7 @@ public class CourierActions {
     @Step("Создание курьера")
     public static Response create(Courier courier) {
         return given()
-                .header("Content-type", "application/json")
+                .spec(Specification.requestSpecification())
                 .and()
                 .body(courier)
                 .when()
@@ -22,7 +23,7 @@ public class CourierActions {
     @Step("Удаление курьера")
     public static Response delete(String id) {
         return given()
-                .header("Content-type", "application/json")
+                .spec(Specification.requestSpecification())
                 .and()
                 .body(new DeleteCourier(id))
                 .when()
@@ -32,7 +33,7 @@ public class CourierActions {
     @Step("Авторизация")
     public static Response login(Login login) {
         return given()
-                .header("Content-type", "application/json")
+                .spec(Specification.requestSpecification())
                 .and()
                 .body(login)
                 .when()

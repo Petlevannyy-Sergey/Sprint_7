@@ -38,11 +38,6 @@ public class CreateCourierParameterizedTests {
         };
     }
 
-    @Before
-    public void setUp() {
-        RestAssured.baseURI = URIs.BASE_URI;
-    }
-
     @After
     public void tearDown() {
         Response response = CourierActions.login(new Login(login, password));

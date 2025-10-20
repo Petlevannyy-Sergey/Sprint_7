@@ -1,11 +1,10 @@
 package order;
 
+import lombok.AllArgsConstructor;
+
+@AllArgsConstructor
 public class Track {
     private  String track;
-
-    public Track(String track) {
-        this.track = track;
-    }
 
     public String getTrack() {
         return track;
